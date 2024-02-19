@@ -16,7 +16,7 @@ import {
   PermissionsAndroid,
   ImageBackground,
   Modal,
-  LogBox
+  LogBox,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -37,7 +37,6 @@ import uuid from 'react-native-uuid';
 import ProgressBar from 'react-native-progress/Bar';
 import Share from 'react-native-share';
 
-
 LogBox.ignoreAllLogs();
 
 const deviceWidth = Dimensions.get('window').width;
@@ -54,6 +53,15 @@ const avatars_array = [
   { id: '6', uri: ip + 'static/avatars/vermeer.jpg' },
   { id: '7', uri: ip + 'static/avatars/bosch.jpg' },
   { id: '8', uri: ip + 'static/avatars/dali.jpg' },
+  { id: '9', uri: ip + 'static/avatars/cassatt.jpg' },
+  { id: '10', uri: ip + 'static/avatars/degas.png' },
+  { id: '11', uri: ip + 'static/avatars/Eduard-Mane.jpg' },
+  { id: '12', uri: ip + 'static/avatars/jturner.jpg' },
+  { id: '13', uri: ip + 'static/avatars/matisse.jpg' },
+  { id: '14', uri: ip + 'static/avatars/michelangelo.jpg' },
+  { id: '15', uri: ip + 'static/avatars/rembrandt.jpg' },
+  { id: '16', uri: ip + 'static/avatars/sezann.jpg' },
+  { id: '17', uri: ip + 'static/avatars/picasso.png' },
 ];
 
 const avatars = {
@@ -65,6 +73,15 @@ const avatars = {
   6: ip + 'static/avatars/vermeer.jpg',
   7: ip + 'static/avatars/bosch.jpg',
   8: ip + 'static/avatars/dali.jpg',
+  9: ip + 'static/avatars/cassatt.jpg',
+  10: ip + 'static/avatars/degas.png',
+  11: ip + 'static/avatars/Eduard-Mane.jpg',
+  12: ip + 'static/avatars/jturner.jpg',
+  13: ip + 'static/avatars/matisse.jpg',
+  14: ip + 'static/avatars/michelangelo.jpg',
+  15: ip + 'static/avatars/rembrandt.jpg',
+  16: ip + 'static/avatars/sezann.jpg',
+  17: ip + 'static/avatars/picasso.png',
 };
 
 const loadImageBase64 = async (capturedImageURI) => {
@@ -556,17 +573,46 @@ function Social({ navigation, route }) {
         onDismiss={toggleAvatarModalVisibility}>
         <View style={styles.viewWrapper}>
           <View style={styles.avatarModalView}>
-            <View style={{ display: "flex", flexDirection: "row", width: 300, flexWrap: "wrap", justifyContent: "center", paddingBottom: 20}}>
-            {avatars_array.map((avatar) => (
-              <View key={avatar.id}>
-              <TouchableOpacity activeOpacity={0.8} onPress={ () => { if (avatar.id <= unlockedArtists) {setAvatarId(avatar.id); setParentState(avatar.id); AsyncStorage.setItem('avatarId', avatar.id.toString());} else {Toast.show("Suggest more labels to unlock this artist!")}} }>
-                <Image
-                  source={{ uri: avatar.uri }}
-                  blurRadius={avatar.id > unlockedArtists ? 30 : 0}
-                  style={{ width: 60, height: 60, borderRadius: 100, margin: 5, borderWidth: 1, borderColor: avatarId == avatar.id ? dark_red : "transparent" }}
-                /></TouchableOpacity>
-              </View>
-            ))}
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                width: 300,
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                paddingBottom: 20,
+              }}>
+              {avatars_array.map((avatar) => (
+                <View key={avatar.id}>
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => {
+                      if (avatar.id <= unlockedArtists) {
+                        setAvatarId(avatar.id);
+                        setParentState(avatar.id);
+                        AsyncStorage.setItem('avatarId', avatar.id.toString());
+                      } else {
+                        Toast.show(
+                          'Suggest more labels to unlock this artist!'
+                        );
+                      }
+                    }}>
+                    <Image
+                      source={{ uri: avatar.uri }}
+                      blurRadius={avatar.id > unlockedArtists ? 30 : 0}
+                      style={{
+                        width: 60,
+                        height: 60,
+                        borderRadius: 100,
+                        margin: 5,
+                        borderWidth: 1,
+                        borderColor:
+                          avatarId == avatar.id ? dark_red : 'transparent',
+                      }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              ))}
             </View>
             <Button
               color={dark_red}
@@ -1911,17 +1957,20 @@ const styles = StyleSheet.create({
   },
   avatarModalView: {
     alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        elevation: 5,
-        transform: [{ translateX: -(deviceWidth * 0.4) }, { translateY: -(deviceHeight * 0.4)}],
-        paddingVertical: 20,
-        width: deviceWidth * 0.8,
-        backgroundColor: '#fff',
-        borderRadius: 7,
-  }
+    justifyContent: 'center',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    elevation: 5,
+    transform: [
+      { translateX: -(deviceWidth * 0.4) },
+      { translateY: -(deviceHeight * 0.4) },
+    ],
+    paddingVertical: 20,
+    width: deviceWidth * 0.8,
+    backgroundColor: '#fff',
+    borderRadius: 7,
+  },
 });
 
 export default function App() {
