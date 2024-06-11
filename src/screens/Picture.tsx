@@ -83,7 +83,8 @@ export default function Picture({ navigation, route }) {
           downloadImage();
         } else {
           // If permission denied then show alert
-          alert('Storage Permission Not Granted');
+          downloadImage();
+          // alert('Storage Permission Not Granted');
         }
       } catch (err) {
         // To handle permission related exception

@@ -3,7 +3,7 @@ const RNFS = require('react-native-fs');
 import ImagePicker from 'react-native-image-crop-picker';
 
 
-export const ip = 'http://hehehe/';
+export const ip = 'http://94.241.140.56:5000/';
 
 export const avatars_array = [
   { id: '1', uri: ip + 'static/avatars/leonardo.webp' },
